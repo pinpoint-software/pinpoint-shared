@@ -1,0 +1,21 @@
+{
+    "name": "pinpoint-software/shared",
+    "description": "Shared interfaces and classes",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Shell",
+            "email": "andrew@andrewshell.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Pinpoint\\Shared\\": "src/Pinpoint/Shared/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
