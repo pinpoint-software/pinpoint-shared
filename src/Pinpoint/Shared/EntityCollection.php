@@ -24,6 +24,16 @@ class EntityCollection implements SeekableIterator, Countable
         $this->entities = array_values($this->entities);
     }
 
+    public function getHash()
+    {
+        return sha1(serialize($this->entities));
+    }
+
+    public function sameHashAs(EntityCollection $entityCollection)
+    {
+        return (0 == strcmp($this->getHash(), $entityCollection->getHash()));
+    }
+
     // Countable Method
 
     public function count()

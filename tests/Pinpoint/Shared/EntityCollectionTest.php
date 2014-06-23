@@ -198,4 +198,35 @@ class EntityCollectionTest extends \PHPUnit_Framework_TestCase
             $entityCollection->current()
         );
     }
+
+    public function testSameAsHashSuccess()
+    {
+        $entity1 = $this->createEntityMock();
+        $entity2 = $this->createEntityMock();
+
+        $entityCollection1 = new EntityCollection();
+        $entityCollection1->addEntity($entity1);
+        $entityCollection1->addEntity($entity2);
+
+        $entityCollection2 = new EntityCollection();
+        $entityCollection2->addEntity($entity1);
+        $entityCollection2->addEntity($entity2);
+
+        $this->assertTrue($entityCollection1->sameHashAs($entityCollection2));
+    }
+
+    public function testSameAsHashFailure()
+    {
+        $entity1 = $this->createEntityMock();
+        $entity2 = $this->createEntityMock();
+
+        $entityCollection1 = new EntityCollection();
+        $entityCollection1->addEntity($entity1);
+        $entityCollection1->addEntity($entity2);
+
+        $entityCollection2 = new EntityCollection();
+        $entityCollection2->addEntity($entity1);
+
+        $this->assertFalse($entityCollection1->sameHashAs($entityCollection2));
+    }
 }
