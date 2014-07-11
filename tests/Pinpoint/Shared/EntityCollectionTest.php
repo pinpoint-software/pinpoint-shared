@@ -199,6 +199,53 @@ class EntityCollectionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testOffsetExists()
+    {
+        $entity1 = $this->createEntityMock();
+        $entity2 = $this->createEntityMock();
+
+        $entityCollection1 = new EntityCollection();
+        $entityCollection1->addEntity($entity1);
+        $entityCollection1->addEntity($entity2);
+
+        $this->assertTrue(isset($entityCollection1[0]));
+        $this->assertTrue(isset($entityCollection1[1]));
+        $this->assertFalse(isset($entityCollection1[2]));
+    }
+
+    public function testOffsetSet()
+    {
+        $entity1 = $this->createEntityMock();
+        $entity2 = $this->createEntityMock();
+
+        $entityCollection1 = new EntityCollection();
+        $entityCollection1[] = $entity1;
+        $entityCollection1[1] = $entity2;
+
+        $this->assertCount(2, $entityCollection1);
+        $this->assertTrue($entity1 === $entityCollection1[0]);
+        $this->assertTrue($entity2 === $entityCollection1[1]);
+    }
+
+    public function testOffsetUnset()
+    {
+        $entity1 = $this->createEntityMock();
+        $entity2 = $this->createEntityMock();
+
+        $entityCollection1 = new EntityCollection();
+        $entityCollection1->addEntity($entity1);
+        $entityCollection1->addEntity($entity2);
+
+        unset($entityCollection1[0]);
+
+        $this->assertCount(1, $entityCollection1);
+
+        // This is weird because if we remove index 0, the other
+        // entity stays at index 1. I think this is as expected
+        // for PHP in general, though?
+        $this->assertTrue($entity2 === $entityCollection1[1]);
+    }
+
     public function testSameAsHashSuccess()
     {
         $entity1 = $this->createEntityMock();

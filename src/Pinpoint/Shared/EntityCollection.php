@@ -1,10 +1,11 @@
 <?php
 namespace Pinpoint\Shared;
 
+use ArrayAccess;
 use Countable;
 use SeekableIterator;
 
-class EntityCollection implements SeekableIterator, Countable
+class EntityCollection implements ArrayAccess, Countable, SeekableIterator
 {
     protected $position = 0;
     protected $entities = array();
@@ -32,6 +33,46 @@ class EntityCollection implements SeekableIterator, Countable
     public function sameHashAs(EntityCollection $entityCollection)
     {
         return (0 == strcmp($this->getHash(), $entityCollection->getHash()));
+    }
+
+    public function slice($offset, $length = null)
+    {
+        $entities = is_null($length)
+            ? array_slice($this->entities, $offset)
+            : array_slice($this->entities, $offset, $length);
+
+        $slicedEntityCollection = new static();
+        foreach ($entities as $entity) {
+            $slicedEntityCollection->addEntity($entity);
+        }
+
+        return $slicedEntityCollection;
+    }
+
+    // ArrayAccess Methods
+
+    public function offsetExists ($offset)
+    {
+        return isset($this->entities[$offset]);
+    }
+
+    public function offsetGet ($offset)
+    {
+        return isset($this->entities[$offset]) ? $this->entities[$offset] : null;
+    }
+
+    public function offsetSet ($offset = null, $value = null)
+    {
+        if (is_null($offset)) {
+            $this->entities[] = $value;
+        } else {
+            $this->entities[$offset] = $value;
+        }
+    }
+
+    public function offsetUnset($offset)
+    {
+        unset($this->entities[$offset]);
     }
 
     // Countable Method
