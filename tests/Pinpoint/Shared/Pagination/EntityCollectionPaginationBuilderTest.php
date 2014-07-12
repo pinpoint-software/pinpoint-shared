@@ -30,7 +30,7 @@ class PaginatedEntityCollectionBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $paginatedEntityCollection->getLastPage());
         $this->assertEquals(10, count($items));
         $this->assertEquals(1, $items[0]->getValue());
-        $this->assertEquals(100, $paginatedEntityCollection->getTotalItemCount());
+        $this->assertEquals(100, $paginatedEntityCollection->getTotalItems());
         $this->assertEquals(10, $paginatedEntityCollection->getItemsPerPage());
         $this->assertEquals(1, $paginatedEntityCollection->getCurrentPage());
     }
@@ -49,7 +49,7 @@ class PaginatedEntityCollectionBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $paginatedEntityCollection->getLastPage());
         $this->assertEquals(10, count($items));
         $this->assertEquals(11, $items[0]->getValue());
-        $this->assertEquals(100, $paginatedEntityCollection->getTotalItemCount());
+        $this->assertEquals(100, $paginatedEntityCollection->getTotalItems());
         $this->assertEquals(10, $paginatedEntityCollection->getItemsPerPage());
         $this->assertEquals(2, $paginatedEntityCollection->getCurrentPage());
     }
@@ -67,7 +67,7 @@ class PaginatedEntityCollectionBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $paginatedEntityCollection->getLastPage());
         $this->assertEquals(10, count($items));
         $this->assertEquals(1, $items[0]->getValue());
-        $this->assertEquals(100, $paginatedEntityCollection->getTotalItemCount());
+        $this->assertEquals(100, $paginatedEntityCollection->getTotalItems());
         $this->assertEquals(10, $paginatedEntityCollection->getItemsPerPage());
         $this->assertEquals(1, $paginatedEntityCollection->getCurrentPage());
     }
@@ -86,7 +86,7 @@ class PaginatedEntityCollectionBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $paginatedEntityCollection->getLastPage());
         $this->assertEquals(10, count($items));
         $this->assertEquals(11, $items[0]->getValue());
-        $this->assertEquals(100, $paginatedEntityCollection->getTotalItemCount());
+        $this->assertEquals(100, $paginatedEntityCollection->getTotalItems());
         $this->assertEquals(10, $paginatedEntityCollection->getItemsPerPage());
         $this->assertEquals(2, $paginatedEntityCollection->getCurrentPage());
     }

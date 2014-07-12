@@ -12,13 +12,13 @@ class PaginatedEntityCollectionBuilder
     private $entityCollection;
     private $itemsPerPage;
     private $currentPage;
-    private $totalItemCount;
+    private $totalItems;
     private $isTruncated;
 
-    private function __construct(EntityCollection $entityCollection, $totalItemCount, $isTruncated)
+    private function __construct(EntityCollection $entityCollection, $totalItems, $isTruncated)
     {
         $this->entityCollection = $entityCollection;
-        $this->totalItemCount = $totalItemCount;
+        $this->totalItems = $totalItems;
         $this->isTruncated = $isTruncated;
     }
 
@@ -27,9 +27,9 @@ class PaginatedEntityCollectionBuilder
         return new static($entityCollection, count($entityCollection), static::IS_NOT_TRUNCATED);
     }
 
-    public static function withTruncatedItems(EntityCollection $entityCollection, $totalItemCount)
+    public static function withTruncatedItems(EntityCollection $entityCollection, $totalItems)
     {
-        return new static($entityCollection, $totalItemCount, static::IS_TRUNCATED);
+        return new static($entityCollection, $totalItems, static::IS_TRUNCATED);
     }
 
     public function itemsPerPage($itemsPerPage)
@@ -48,10 +48,10 @@ class PaginatedEntityCollectionBuilder
 
     public function build()
     {
-        $totalItemCount = $this->totalItemCount;
+        $totalItems = $this->totalItems;
         $itemsPerPage = $this->itemsPerPage ?: 25;
         $firstPage = 1;
-        $lastPage = ceil($totalItemCount / $itemsPerPage);
+        $lastPage = ceil($totalItems / $itemsPerPage);
         $currentPage = $this->currentPage ?: 1;
 
         $items = $this->isTruncated
@@ -60,7 +60,7 @@ class PaginatedEntityCollectionBuilder
 
         return new PaginatedEntityCollection(
             $items,
-            $totalItemCount,
+            $totalItems,
             $itemsPerPage,
             $firstPage,
             $lastPage,

@@ -7,7 +7,7 @@ use Pinpoint\Shared\EntityCollection;
 class PaginatedEntityCollection
 {
     private $items;
-    private $totalItemCount;
+    private $totalItems;
     private $itemsPerPage;
     private $firstPage;
     private $lastPage;
@@ -15,14 +15,14 @@ class PaginatedEntityCollection
 
     public function __construct(
         EntityCollection $items,
-        $totalItemCount,
+        $totalItems,
         $itemsPerPage,
         $firstPage,
         $lastPage,
         $currentPage
     ) {
         $this->items = $items;
-        $this->totalItemCount = $totalItemCount;
+        $this->totalItems = $totalItems;
         $this->itemsPerPage = $itemsPerPage;
         $this->firstPage = $firstPage;
         $this->lastPage = $lastPage;
@@ -34,9 +34,9 @@ class PaginatedEntityCollection
         return $this->items;
     }
 
-    public function getTotalItemCount()
+    public function getTotalItems()
     {
-        return $this->totalItemCount;
+        return $this->totalItems;
     }
 
     public function getItemsPerPage()
