@@ -107,6 +107,11 @@ abstract class UuidIdentity implements Identity, GeneratesIdentity
 
     private static function guardUuid($string)
     {
+        if (is_numeric($string)) {
+            // Support legacy numeric auto-increment ID values.
+            return;
+        }
+
         $pattern = '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i';
         if(!preg_match($pattern, $string)) {
             throw new \InvalidArgumentException("UUID of the form nnnnnnnn-nnnn-nnnn-nnnn-nnnnnnnnnnnn expected");
