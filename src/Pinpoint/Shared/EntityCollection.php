@@ -95,6 +95,9 @@ class EntityCollection implements ArrayAccess, Countable, SeekableIterator
 
     public function current()
     {
+        if (!isset($this->entities[$this->position])) {
+            throw new \OutOfBoundsException("invalid current position ({$this->position})");
+        }
         return $this->entities[$this->position];
     }
 
